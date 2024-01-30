@@ -1,0 +1,409 @@
+      
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Marksheet</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <style>
+            *{
+                background-color: white;
+                transition: all .20s ease;
+            }
+
+            #content{
+                width: auto;
+                font-family:FontAwesome;
+                margin-top:5%;
+                margin-left: 10%;
+                text-align: center;
+            }
+
+            centered-text {
+            text-align: center;
+            margin-top: 5%;
+        }
+
+            #top-nav-bar{
+                
+                padding: 10px;
+                text-align: center;
+                font-family:FontAwesome;
+                font-weight:400;
+                font-size:12px;
+                width: 100%;
+                display: flex;
+                height: auto;
+                box-sizing: border-box;
+                position: relative;
+                margin: 0 auto;
+                overflow: visible;
+                justify-content: space-between;
+                z-index: 10;
+            }
+
+            #web-name{
+                float:left;
+                padding-left: 5%;
+                font-size:16px;
+                display: block;
+                font-family: Arial;
+            }
+            #main-menu{
+                float: right;
+                padding-left:5%;
+                display: block;
+                font-family: Arial;
+            }
+            #print, #reset{
+                padding:0px;
+            }
+            a{
+                padding-left: 25px;
+                text-decoration: none;
+                color: black;
+                font-weight: bold;
+            }
+            a:hover{
+                color: red;
+            }
+            li{
+                display: inline-block;
+            }
+            #mob-nav-open, #mob-nav-close{
+                top:20px;
+                right: 10px;
+                position: absolute;
+                padding:0 0 0 20px;
+                display: none;
+                transition: 2s;
+            }
+            table{
+                background-color: gainsboro;
+                border: 0px;
+                width: 50%;
+                margin-left: 25%;
+                margin-right: 25%;
+                text-align: center;
+            }
+            table tr{
+                color:black;
+            }
+            th{
+                text-align: center;
+                background-color:#DAA520;
+            }
+            td{
+                text-align: center;
+                background-color:#FFFACD
+            }
+            #m, #t{
+                background-color: #EEE8AA;
+            }
+            span{
+                margin-right: 0px;
+                color:red;
+                font-weight: bold;
+                width:auto;
+                height: auto;
+                font-size: 1.3vw;
+            }
+            #search, input, button{
+                font-size: 1.2vw;
+                size: 1.5vw;
+            }
+            button{
+                cursor:pointer;
+            }
+
+            @media  screen and (max-width:850px){
+
+                #web-name{
+                    padding-left: 0px;
+                }
+                #main-menu{
+                    display:none;
+                }
+                #mob-nav-open{
+                    display: block;
+                }
+                #top-nav-bar{
+                    display: block;
+                }
+                #top-nav-bar{
+                    flex-direction: column;
+                    align-items: flex-start;
+                    display: flex;
+
+                }
+                #main-menu{
+                    width: 100%;
+                    height: 100%;
+                    transition: 1s ease;
+                    z-index: 20;
+                    text-align: left;
+                }
+                li{
+                    display:block;
+                    padding: 10px;
+                    border-top: 1px solid red;
+                    font-family: FontAwesome;
+                    font-size: 12px;
+                    font-weight: bold;
+                }
+                li > a{
+                    display: inline-block;
+                    width: 98%;
+                }
+            }
+
+        </style>   
+
+        <script>
+    function mobnav(){
+        var a = document.getElementById("main-menu");
+        var open = document.getElementById("mob-nav-open");
+        var close = document.getElementById("mob-nav-close");
+        open.style.display ="none";
+        close.style.display ="block";
+        if(a.style.display === "block"){
+            a.style.display = "none";
+        }
+        else{
+        a.style.display = 'block';
+        }
+    }
+
+    function mobnavclose(){
+        var a = document.getElementById("main-menu");
+        var open = document.getElementById("mob-nav-open");
+        var close = document.getElementById("mob-nav-close");
+        open.style.display = "";
+        close.style.display = "none";
+        a.style.display = "";
+    }
+        </script>
+        <!-- ... (your existing HTML code) ... -->
+
+<!-- ... (existing HTML code) ... -->
+
+<script>
+    function calculateResult() {
+        const subjects = [
+            {
+                name: "Psychology",
+                totalMarks: 100,
+                obtainedMarks: parseInt(document.getElementById("psychologyMarks").value)
+            },
+            {
+            name: "Website Development",
+            totalMarks: 100,
+            obtainedMarks: parseInt(document.getElementById("webDevMarks").value)
+        },
+        ];
+
+        for (let i = 0; i < subjects.length; i++) {
+            const subject = subjects[i];
+            const obtainedMarks = subject.obtainedMarks;
+            const totalMarks = subject.totalMarks;
+
+            // Calculate percentage
+            const percentage = (obtainedMarks / totalMarks) * 100;
+            let grade = '';
+            let passFail = '';
+
+            // Determine pass/fail status
+            if (obtainedMarks >= 60) {
+                passFail = 'Pass';
+            } else {
+                passFail = 'Fail';
+            }
+
+            // Determine grade based on specific grade ranges
+            if (obtainedMarks < 60) {
+                grade = 'F';
+            } else if (obtainedMarks >= 60 && obtainedMarks <= 66) {
+                grade = 'C';
+            } else if (obtainedMarks >= 67 && obtainedMarks <= 74) {
+                grade = 'B';
+            } else if (obtainedMarks >= 75 && obtainedMarks <= 81) {
+                grade = 'B+';
+            } else if (obtainedMarks >= 82 && obtainedMarks <= 87) {
+                grade = 'A';
+            } else if (obtainedMarks >= 88 && obtainedMarks <= 100) {
+                grade = 'A+';
+            }
+            // Add other grading criteria similarly...
+
+            document.getElementById(`grade${i}`).innerText = grade;
+            document.getElementById(`passFail${i}`).innerText = passFail;
+            document.getElementById(`percentage${i}`).innerText = percentage.toFixed(2) + '%';
+        }
+    }
+</script>
+
+<!-- ... (rest of your HTML code) ... -->
+
+
+    </head>
+    <body >
+    <div class="container">
+        <div class="top-nav-bar" id="top-nav-bar">
+    <div class="logo">
+        <img src="IUlogo.png" alt="Logo" width="100" height="80">
+    </div>
+    <div class="centered-text">
+        <h1 style="font-family: Arial;">IQRA UNIVERSITY RESULTS<br>Students Marksheets</h1>
+    </div>
+            <ul class="main-menu" id="main-menu" title="main menu">
+                <li><a href="admin" title="admin login">ADMIN</a></li>
+                <li><a href="home" title="home">HOME</a></li>
+                <li><a href="result" title="result">RESULT</a></li>
+                <li><a href="register" title="register">SIGNUP</a></li>
+                <li><a href="login_page" title="login">LOGIN</a></li>
+                <li><a href="logout_user" title="logout">LOGOUT</a></li>
+                </ul>
+
+            <a href="javascript:void(0);" id="mob-nav-open" class="icon" onclick="mobnav()">
+            <i class="fa fa-bars fa-lg"></i>
+            </a>
+            <a href="javascript:void(0);" id="mob-nav-close" class="icon" onclick="mobnavclose()">
+                <i class="fas fa-times fa-lg"></i>
+                </a>
+        </div> 
+
+        <div id="inputSection">
+            <h2>Enter Marks</h2>
+            <div>
+                <label for="psychologyMarks">Psychology:</label>
+                <input type="number" id="psychologyMarks" min="0" max="100">
+            </div>
+            <div>
+                <label for="webDevMarks">Website Development:</label>
+                <input type="number" id="webDevMarks" min="0" max="100">
+            </div>
+            <!-- Add input sections for other subjects similarly... -->
+            <button onclick="calculateResult()">Calculate</button>
+        </div>
+
+        <div id="content">
+            <form action="get_marks"  id="search" style="font-size: 1.5vw;">
+              <label for="register_number"><strong> Registration Number: </strong></label>
+              <input id="register_number"
+              oninput="this.value=this.value.slice(0,this.maxLength)"
+              type="number" required name="mobile_number" maxlength="9">
+              <button id="submit" type="submit" >Get Result</button>
+            </form>
+            <br><br>
+
+               <span><a id="print" href="print">Print</span>|<a id="reset" href="reset"><strong>Reset</strong> </a></span>
+               <table >
+                <tr >
+                    <th id="t"> Registration Number </th>
+                    <td> 15073 </td>
+                </tr>
+                <tr>
+                    <th id="t"> Name </th>
+                    <td> FATIMA NAWAZ </td>
+                </tr>
+                <tr>
+                    <th id="t"> Date Of Birth </th>
+                    <td> 30/09/2001 </td>
+                </tr>
+               </table>
+
+               <table>
+                
+                <tr>
+                    <th> Serial Number </th>
+                    <th> Subject Name </th>
+                    <th> Total Marks </th>
+                    <th> Obtained Marks </th>
+                    <th> Grade </th>
+                    <th> Pass/Fail </th>
+                    <th> Percentage</th>
+                </tr>
+
+                <tr>
+                    <td><strong>1</strong></td>
+                    <td> <strong> Psychology </strong> </td>
+                    <td>100</td>
+                    <td><input type="number" id="psychologyMarks" min="0" max="100"></td>
+                    <td id="grade0"></td>
+                    <td id="passFail0"></td>
+                    <td id="percentage0"></td>
+                    
+                </tr>
+                <tr>
+                    <td><strong>2</strong></td>
+                    <td> <strong> Website Development </strong> </td>
+                    <td>100</td>
+                    <td><input type="number" id="webDevMarks" min="0" max="100"></td>
+                    <td id="gradeWebDev"></td>
+                    <td id="passFailWebDev"></td>
+                    <td id="percentageWebDev"></td>
+                </tr>
+                <tr>
+                    <td><strong>3</strong></td>
+                    <td> <strong> Communication Skills </strong> </td>
+                    <td> 100 </td>
+                    <td> 78 </td>
+                    <td> B </td>
+                    <td> Pass </td>
+                    <td> 78% </td>
+                </tr>
+                <tr>
+                    <td id="m"> <strong>4</strong></td> 
+                    <td id="m"> <strong> Fundmentals of Digital Marketing </strong> </td>
+                    <td id="m"> 100 </td>
+                    <td id="m"> 88 </td>
+                    <td id="m"> A </td>
+                    <td id="m"> Pass </td>
+                    <td id="m"> 88% </td>
+                </tr>
+                <tr>
+                    <td><strong>5</strong> </td>
+                    <td> <strong> Functional English </strong> </td>
+                    <td> 100 </td>
+                    <td> 83 </td>
+                    <td> B+ </td>
+                    <td> Pass </td>
+                    <td> 83% </td>
+                </tr>
+                <tr>
+                    <td id="m"><strong>6</strong></td>
+                    <td id="m"><strong> Ethics and Social Responsibility </strong> </td>
+                    <td id="m"> 100 </td>
+                    <td id="m"> 95 </td>
+                    <td id="m"> A+ </td>
+                    <td id="m"> Pass </td>
+                    <td id="m"> 95% </td>
+                </tr>
+                <tr>
+                    <td><strong>7</strong></td>
+                    <td> <strong> Photography </strong> </td>
+                    <td> 100 </td>
+                    <td> 91 </td>
+                    <td> A+ </td>
+                    <td> Pass </td>
+                    <td> 91%</td>
+                </tr>
+                <tr>
+                    <td colspan="6"><strong>Cumulative Grade Point Average (CGPA)</strong></td>
+                    <td><strong>3.71</strong></td> 
+                </tr>
+               </table>
+               
+               <span>
+                <b> A-Absent | P-PASS | F-FAIL | RE - RA-Appear </b>
+               </span>
+
+        </div>    
+    </div>
+
+    </body>
+    </html>
+
